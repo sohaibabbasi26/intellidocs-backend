@@ -1,0 +1,28 @@
+version: '3'
+services:
+
+    pgsql:
+        image: postgres:14.7
+        volumes:
+            - ./db:/var/lib/postgresql/data
+            # - ./postgres-initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
+        ports:
+            - "7778:5432"
+        networks:
+            - intellidocs-net
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: KNB3326YBRG#
+            POSTGRES_DB: intellidocs_db
+            
+    adminer:
+        image: adminer
+        restart: always
+        networks:
+            - intellidocs-net
+        ports:
+            - 8080:8080
+
+networks:
+    intellidocs-net:
+        driver: bridge
